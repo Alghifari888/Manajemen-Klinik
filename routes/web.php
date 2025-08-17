@@ -31,7 +31,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         return view('admin.dashboard');
     })->name('dashboard');
 
-    // Tambahkan rute admin lainnya di sini (manajemen dokter, poli, dll)
+    // Rute CRUD untuk Manajemen Poli
+    Route::resource('polis', \App\Http\Controllers\Admin\PoliController::class);
+
 });
 
 // Rute untuk Dokter

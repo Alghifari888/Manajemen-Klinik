@@ -12,9 +12,42 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <!-- PENTING: Link Dashboard ini akan mengarahkan ke halaman yang sesuai role -->
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <!-- =============================================================== -->
+                    <!-- AWAL DARI KODE BARU: MENU BERDASARKAN ROLE -->
+                    <!-- =============================================================== -->
+
+                    <!-- PENTING: Menu ini hanya akan muncul jika user yang login adalah ADMIN -->
+                    @if(Auth::user()->role === \App\Enums\UserRole::ADMIN)
+                        <x-nav-link :href="route('admin.polis.index')" :active="request()->routeIs('admin.polis.*')">
+                            {{ __('Manajemen Poli') }}
+                        </x-nav-link>
+                        <!-- Nanti kita akan tambahkan menu Manajemen Dokter, dll di sini -->
+                    @endif
+
+                    <!-- PENTING: Menu ini hanya akan muncul jika user yang login adalah DOKTER -->
+                    @if(Auth::user()->role === \App\Enums\UserRole::DOKTER)
+                        <!-- Contoh menu untuk dokter (masih komentar, akan kita aktifkan nanti) -->
+                        {{-- <x-nav-link href="#">
+                            {{ __('Jadwal Saya') }}
+                        </x-nav-link> --}}
+                    @endif
+
+                    <!-- PENTING: Menu ini hanya akan muncul jika user yang login adalah PASIEN -->
+                    @if(Auth::user()->role === \App\Enums\UserRole::PASIEN)
+                         <!-- Contoh menu untuk pasien (masih komentar, akan kita aktifkan nanti) -->
+                        {{-- <x-nav-link href="#">
+                            {{ __('Booking Online') }}
+                        </x-nav-link> --}}
+                    @endif
+
+                    <!-- =============================================================== -->
+                    <!-- AKHIR DARI KODE BARU -->
+                    <!-- =============================================================== -->
                 </div>
             </div>
 
@@ -23,6 +56,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            <!-- PENTING: Menampilkan nama user yang sedang login -->
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -39,6 +73,7 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
+                        <!-- PENTING: Form ini yang menjalankan fungsi logout -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -64,12 +99,19 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
+    <!-- Responsive Navigation Menu (Untuk Tampilan Mobile) -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+             <!-- PENTING: Anda juga perlu menambahkan menu role-based di sini untuk tampilan mobile -->
+             @if(Auth::user()->role === \App\Enums\UserRole::ADMIN)
+                <x-responsive-nav-link :href="route('admin.polis.index')" :active="request()->routeIs('admin.polis.*')">
+                    {{ __('Manajemen Poli') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
