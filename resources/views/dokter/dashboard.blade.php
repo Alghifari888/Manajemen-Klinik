@@ -68,18 +68,14 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            @if ($booking->status == 'confirmed')
-                                                <form action="{{ route('dokter.booking.complete', $booking->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-md text-xs hover:bg-green-700">
-                                                        Tandai Selesai
-                                                    </button>
-                                                </form>
-                                            @else
-                                                <span class="text-sm text-gray-500">-</span>
-                                            @endif
-                                        </td>
+                                                @if ($booking->status == 'confirmed')
+                                                    <a href="{{ route('dokter.medical-record.create', $booking->id) }}" class="px-4 py-2 bg-indigo-600 text-white rounded-md text-xs hover:bg-indigo-700">
+                                                        Input Rekam Medis
+                                                    </a>
+                                                @else
+                                                    <span class="text-sm text-gray-500">-</span>
+                                                @endif
+                                            </td>
                                     </tr>
                                 @empty
                                     <tr>
