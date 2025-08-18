@@ -3,11 +3,12 @@
 
 ## ✨ Kutipan
 > "Aku tidak berilmu; yang berilmu hanyalah DIA. Jika tampak ilmu dariku, itu hanyalah pantulan dari Cahaya-Nya."
-
+---
 Sistem Manajemen Klinik ini adalah sebuah aplikasi web yang dibangun menggunakan Laravel 12. Aplikasi ini dirancang untuk membantu klinik skala kecil hingga menengah di Indonesia dalam mengelola proses bisnis utama, mulai dari pendaftaran pasien, penjadwalan janji temu daring, pencatatan rekam medis, hingga proses pembayaran dan pelaporan.
 
 Sistem ini memiliki empat hak akses (role) yang berbeda: **Admin**, **Dokter**, **Kasir/Resepsionis**, dan **Pasien**, masing-masing dengan dasbor dan fungsionalitas yang disesuaikan dengan kebutuhannya.
 
+---
 ## 🎥 Demo
 ![Demo](./videoujicoba.gif)
 
