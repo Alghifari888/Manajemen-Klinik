@@ -33,6 +33,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Rute CRUD untuk Manajemen Poli
     Route::resource('polis', \App\Http\Controllers\Admin\PoliController::class);
+    // Rute CRUD untuk Manajemen Dokter
+    Route::resource('doctors', \App\Http\Controllers\Admin\DoctorController::class);
 
 });
 

@@ -22,12 +22,15 @@
                     <!-- =============================================================== -->
 
                     <!-- PENTING: Menu ini hanya akan muncul jika user yang login adalah ADMIN -->
-                    @if(Auth::user()->role === \App\Enums\UserRole::ADMIN)
-                        <x-nav-link :href="route('admin.polis.index')" :active="request()->routeIs('admin.polis.*')">
-                            {{ __('Manajemen Poli') }}
-                        </x-nav-link>
-                        <!-- Nanti kita akan tambahkan menu Manajemen Dokter, dll di sini -->
-                    @endif
+                @if(Auth::user()->role === \App\Enums\UserRole::ADMIN)
+                    <x-nav-link :href="route('admin.polis.index')" :active="request()->routeIs('admin.polis.*')">
+                        {{ __('Manajemen Poli') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('admin.doctors.index')" :active="request()->routeIs('admin.doctors.*')">
+                        {{ __('Manajemen Dokter') }}
+                    </x-nav-link>
+                @endif
 
                     <!-- PENTING: Menu ini hanya akan muncul jika user yang login adalah DOKTER -->
                     @if(Auth::user()->role === \App\Enums\UserRole::DOKTER)
@@ -108,10 +111,14 @@
 
              <!-- PENTING: Anda juga perlu menambahkan menu role-based di sini untuk tampilan mobile -->
              @if(Auth::user()->role === \App\Enums\UserRole::ADMIN)
-                <x-responsive-nav-link :href="route('admin.polis.index')" :active="request()->routeIs('admin.polis.*')">
-                    {{ __('Manajemen Poli') }}
-                </x-responsive-nav-link>
-            @endif
+    <x-responsive-nav-link :href="route('admin.polis.index')" :active="request()->routeIs('admin.polis.*')">
+        {{ __('Manajemen Poli') }}
+    </x-responsive-nav-link>
+    
+    <x-responsive-nav-link :href="route('admin.doctors.index')" :active="request()->routeIs('admin.doctors.*')">
+        {{ __('Manajemen Dokter') }}
+    </x-responsive-nav-link>
+@endif
         </div>
 
         <!-- Responsive Settings Options -->
