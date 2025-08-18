@@ -14,6 +14,7 @@ use App\Http\Controllers\Pasien\BookingController;
 use App\Http\Controllers\Dokter\DashboardController; 
 use App\Http\Controllers\Dokter\MedicalRecordController; 
 use App\Http\Controllers\Kasir\PaymentController;
+use App\Http\Controllers\Admin\ReportController;
 
 // Di sini kita memberikan alias agar tidak terjadi konflik nama
 use App\Http\Controllers\Pasien\DashboardController as PasienDashboardController;
@@ -49,6 +50,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('polis', PoliController::class);
     Route::resource('doctors', DoctorController::class);
     Route::resource('doctors.schedules', DoctorScheduleController::class)->shallow();
+    // RUTE BARU UNTUK LAPORAN
+    Route::get('/reports/revenue', [ReportController::class, 'revenueReport'])->name('reports.revenue');
+    Route::get('/reports/patients', [ReportController::class, 'patientReport'])->name('reports.patients');
 });
 
 // Rute untuk Dokter
