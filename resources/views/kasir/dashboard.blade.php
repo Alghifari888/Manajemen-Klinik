@@ -13,6 +13,11 @@
                     <span class="block sm:inline">{{ session('success') }}</span>
                 </div>
             @endif
+             @if (session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -21,9 +26,9 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No. Antrian</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Antrian</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Pasien</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dokter Tujuan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dokter</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
                                 </tr>
@@ -40,9 +45,11 @@
                                             @elseif($booking->status == 'confirmed')
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Terkonfirmasi</span>
                                             @elseif($booking->status == 'completed')
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai</span>
-                                            @else
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Dibatalkan</span>
+                                                @if($booking->payment)
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 text-teal-800">Lunas</span>
+                                                @else
+                                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai Diperiksa</span>
+                                                @endif
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -54,6 +61,10 @@
                                                         Konfirmasi Kedatangan
                                                     </button>
                                                 </form>
+                                            @elseif ($booking->status == 'completed' && !$booking->payment)
+                                                <a href="{{ route('kasir.payment.create', $booking->id) }}" class="px-4 py-2 bg-green-600 text-white rounded-md text-xs hover:bg-green-700">
+                                                    Proses Pembayaran
+                                                </a>
                                             @else
                                                 <span class="text-sm text-gray-500">-</span>
                                             @endif

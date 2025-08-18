@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DoctorScheduleController;
 use App\Http\Controllers\Pasien\BookingController;
 use App\Http\Controllers\Dokter\DashboardController; 
 use App\Http\Controllers\Dokter\MedicalRecordController; 
+use App\Http\Controllers\Kasir\PaymentController;
 
 // Di sini kita memberikan alias agar tidak terjadi konflik nama
 use App\Http\Controllers\Pasien\DashboardController as PasienDashboardController;
@@ -62,9 +63,12 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->name('dokter.')->g
 
 // Rute untuk Kasir
 Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->name('kasir.')->group(function () {
-    // PENTING: Gunakan alias yang sudah kita buat
     Route::get('/dashboard', [KasirDashboardController::class, 'index'])->name('dashboard');
     Route::patch('/bookings/{booking}/confirm', BookingConfirmationController::class)->name('booking.confirm');
+
+    // RUTE BARU UNTUK PEMBAYARAN
+    Route::get('/bookings/{booking}/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/bookings/{booking}/payment', [PaymentController::class, 'store'])->name('payment.store');
 });
 
 // Rute untuk Pasien

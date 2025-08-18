@@ -12,8 +12,9 @@ class DashboardController extends Controller
     {
         // Ambil semua booking untuk hari ini (today())
         $bookings = Booking::whereDate('booking_date', today())
-                            ->with(['patient.user', 'doctor.user']) // Eager load relasi
-                            ->orderBy('queue_number', 'asc') // Urutkan berdasarkan nomor antrian
+                            // TAMBAHKAN 'payment' DI SINI untuk mengecek status pembayaran
+                            ->with(['patient.user', 'doctor.user', 'payment']) 
+                            ->orderBy('queue_number', 'asc')
                             ->get();
 
         return view('kasir.dashboard', compact('bookings'));
