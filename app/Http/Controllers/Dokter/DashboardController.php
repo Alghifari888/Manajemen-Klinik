@@ -11,11 +11,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Ambil data dokter yang sedang login
         $doctor = Auth::user()->doctor;
 
-        // Ambil data booking untuk dokter ini, pada hari ini,
-        // yang statusnya sudah dikonfirmasi (menunggu diperiksa) atau sudah selesai
         $bookings = Booking::where('doctor_id', $doctor->id)
                             ->whereDate('booking_date', today())
                             ->whereIn('status', ['confirmed', 'completed'])
@@ -23,6 +20,17 @@ class DashboardController extends Controller
                             ->orderBy('queue_number', 'asc')
                             ->get();
         
-        return view('dokter.dashboard', compact('bookings'));
+        // Hitung jumlah pasien yang menunggu
+        $waitingPatients = $bookings->where('status', 'confirmed')->count();
+        
+        // Hitung jumlah pasien yang sudah selesai
+        $completedPatients = $bookings->where('status', 'completed')->count();
+
+        // Kirim semua data ke view
+        return view('dokter.dashboard', compact(
+            'bookings', 
+            'waitingPatients', 
+            'completedPatients'
+        ));
     }
 }
