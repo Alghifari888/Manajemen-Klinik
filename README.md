@@ -1,7 +1,8 @@
 # Sistem Manajemen Klinik Berbasis Web
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-> "Aku tidak berilmu yang berilmu hanyalah DIA. Jika tampak ilmu dariku, itu hanyalah pantulan dari Cahaya-Nya."
+## ✨ Kutipan
+> "Aku tidak berilmu; yang berilmu hanyalah DIA. Jika tampak ilmu dariku, itu hanyalah pantulan dari Cahaya-Nya."
 
 Sistem Manajemen Klinik ini adalah sebuah aplikasi web yang dibangun menggunakan Laravel 12. Aplikasi ini dirancang untuk membantu klinik skala kecil hingga menengah di Indonesia dalam mengelola proses bisnis utama, mulai dari pendaftaran pasien, penjadwalan janji temu daring, pencatatan rekam medis, hingga proses pembayaran dan pelaporan.
 
