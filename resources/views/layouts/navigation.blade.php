@@ -30,9 +30,9 @@
 
                     <!-- Role: DOKTER -->
                     @if(Auth::user()->role === \App\Enums\UserRole::DOKTER)
-                        <x-nav-link :href="route('dokter.schedules.index')" :active="request()->routeIs('dokter.schedules.*')">
-                            {{ __('Jadwal Saya') }}
-                        </x-nav-link>
+                        <!-- KODE LAMA DIHAPUS: Link ke jadwal dokter dihapus karena rutenya belum dibuat. -->
+                        <!-- Ini adalah perbaikan untuk error 'Route [dokter.schedules.index] not defined'. -->
+                        <!-- Fitur ini akan kita tambahkan di langkah selanjutnya. -->
                     @endif
 
                     <!-- Role: PASIEN -->
@@ -109,9 +109,7 @@
 
             <!-- Role: DOKTER -->
             @if(Auth::user()->role === \App\Enums\UserRole::DOKTER)
-                <x-responsive-nav-link :href="route('dokter.schedules.index')" :active="request()->routeIs('dokter.schedules.*')">
-                    {{ __('Jadwal Saya') }}
-                </x-responsive-nav-link>
+                <!-- KODE LAMA DIHAPUS: Link jadwal dokter untuk mobile juga dihapus untuk konsistensi. -->
             @endif
 
             <!-- Role: PASIEN -->

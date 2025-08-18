@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\DoctorScheduleController;
 use App\Http\Controllers\Pasien\BookingController;
+use App\Http\Controllers\Dokter\DashboardController; 
+use App\Http\Controllers\Dokter\MedicalRecordController; 
 
 // Di sini kita memberikan alias agar tidak terjadi konflik nama
 use App\Http\Controllers\Pasien\DashboardController as PasienDashboardController;
@@ -50,9 +52,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 // Rute untuk Dokter
 Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->name('dokter.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dokter.dashboard');
-    })->name('dashboard');
+    // Rute dashboard utama dokter
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Rute untuk mengelola rekam medis
+    Route::get('/bookings/{booking}/medical-record/create', [MedicalRecordController::class, 'create'])->name('medical-record.create');
+    Route::post('/bookings/{booking}/medical-record', [MedicalRecordController::class, 'store'])->name('medical-record.store');
 });
 
 // Rute untuk Kasir
