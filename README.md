@@ -8,7 +8,9 @@ Sistem Manajemen Klinik ini adalah sebuah aplikasi web yang dibangun menggunakan
 
 Sistem ini memiliki empat hak akses (role) yang berbeda: **Admin**, **Dokter**, **Kasir/Resepsionis**, dan **Pasien**, masing-masing dengan dasbor dan fungsionalitas yang disesuaikan dengan kebutuhannya.
 
----
+## 🎥 Demo
+![Demo](./videoujicoba.gif)
+
 
 ## Fitur Utama
 
