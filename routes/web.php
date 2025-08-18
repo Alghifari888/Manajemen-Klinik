@@ -1,13 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// ======================================================================
+// PENTING: BAGIAN IMPORT CONTROLLER DENGAN ALIAS
+// ======================================================================
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardRedirectorController;
 use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\DoctorScheduleController;
 use App\Http\Controllers\Pasien\BookingController;
-use App\Http\Controllers\Pasien\DashboardController;
+
+// Di sini kita memberikan alias agar tidak terjadi konflik nama
+use App\Http\Controllers\Pasien\DashboardController as PasienDashboardController;
+use App\Http\Controllers\Kasir\DashboardController as KasirDashboardController;
+use App\Http\Controllers\Kasir\BookingConfirmationController;
 
 
 // Rute Halaman Utama
@@ -35,11 +43,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
-
-    // Rute CRUD untuk Manajemen Poli
     Route::resource('polis', PoliController::class);
-    
-    // Rute CRUD untuk Manajemen Dokter dan Jadwalnya (Nested)
     Route::resource('doctors', DoctorController::class);
     Route::resource('doctors.schedules', DoctorScheduleController::class)->shallow();
 });
@@ -53,26 +57,21 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->name('dokter.')->g
 
 // Rute untuk Kasir
 Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->name('kasir.')->group(function () {
-    Route::get('/dashboard', function () {
-        // Kita akan buat view-nya nanti
-        return "<h1>Ini Dashboard Kasir</h1>";
-    })->name('dashboard');
+    // PENTING: Gunakan alias yang sudah kita buat
+    Route::get('/dashboard', [KasirDashboardController::class, 'index'])->name('dashboard');
+    Route::patch('/bookings/{booking}/confirm', BookingConfirmationController::class)->name('booking.confirm');
 });
 
-// Ganti blok rute Pasien yang lama dengan yang ini
-// Rute untuk Pasien
 // Rute untuk Pasien
 Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->name('pasien.')->group(function () {
-    // Arahkan ke DashboardController yang baru
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-
-    // Rute untuk Alur Booking
+    // PENTING: Gunakan alias yang sudah kita buat
+    Route::get('/dashboard', [PasienDashboardController::class, 'index'])->name('dashboard');
     Route::get('/booking/pilih-poli', [BookingController::class, 'stepOne'])->name('booking.step-one');
     Route::get('/booking/pilih-dokter/{poli}', [BookingController::class, 'stepTwo'])->name('booking.step-two');
     Route::get('/booking/pilih-jadwal/{doctor}', [BookingController::class, 'stepThree'])->name('booking.step-three');
     Route::post('/booking/simpan', [BookingController::class, 'store'])->name('booking.store');
 });
+
 
 // Meng-include file rute autentikasi bawaan Breeze
 require __DIR__.'/auth.php';
