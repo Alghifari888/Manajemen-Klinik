@@ -34,50 +34,56 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @forelse ($bookings as $booking)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap font-bold text-lg">{{ $booking->queue_number }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $booking->patient->user->name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $booking->doctor->user->name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @if($booking->status == 'pending')
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Menunggu</span>
-                                            @elseif($booking->status == 'confirmed')
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Terkonfirmasi</span>
-                                            @elseif($booking->status == 'completed')
-                                                @if($booking->payment)
-                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 text-teal-800">Lunas</span>
-                                                @else
-                                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai Diperiksa</span>
-                                                @endif
-                                            @endif
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @if ($booking->status == 'pending')
-                                                <form action="{{ route('kasir.booking.confirm', $booking->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md text-xs hover:bg-blue-700">
-                                                        Konfirmasi Kedatangan
-                                                    </button>
-                                                </form>
-                                            @elseif ($booking->status == 'completed' && !$booking->payment)
-                                                <a href="{{ route('kasir.payment.create', $booking->id) }}" class="px-4 py-2 bg-green-600 text-white rounded-md text-xs hover:bg-green-700">
-                                                    Proses Pembayaran
-                                                </a>
-                                            @else
-                                                <span class="text-sm text-gray-500">-</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
-                                            Tidak ada pasien booking untuk hari ini.
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
+    @forelse ($bookings as $booking)
+        <tr>
+            <td class="px-6 py-4 whitespace-nowrap font-bold text-lg">{{ $booking->queue_number }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ $booking->patient->user->name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ $booking->doctor->user->name }}</td>
+
+            <td class="px-6 py-4 whitespace-nowrap">
+                @if($booking->status == 'pending')
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Menunggu</span>
+                @elseif($booking->status == 'confirmed')
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Terkonfirmasi</span>
+                @elseif($booking->status == 'completed')
+                    @if($booking->payment)
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 text-teal-800">Lunas</span>
+                    @else
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Selesai Diperiksa</span>
+                    @endif
+                @endif
+            </td>
+            
+            <td class="px-6 py-4 whitespace-nowrap">
+                @if ($booking->status == 'pending')
+                    <form action="{{ route('kasir.booking.confirm', $booking->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md text-xs hover:bg-blue-700">
+                            Konfirmasi Kedatangan
+                        </button>
+                    </form>
+                @elseif ($booking->status == 'completed' && !$booking->payment)
+                    <a href="{{ route('kasir.payment.create', $booking->id) }}" class="px-4 py-2 bg-green-600 text-white rounded-md text-xs hover:bg-green-700">
+                        Proses Pembayaran
+                    </a>
+                @elseif ($booking->payment)
+                    <a href="{{ route('kasir.payment.show', $booking->payment->id) }}" target="_blank" class="px-4 py-2 bg-gray-600 text-white rounded-md text-xs hover:bg-gray-700">
+                        Cetak Kwitansi
+                    </a>
+                @else
+                    <span class="text-sm text-gray-500">-</span>
+                @endif
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
+                Tidak ada pasien booking untuk hari ini.
+            </td>
+        </tr>
+    @endforelse
+</tbody>
                         </table>
                     </div>
                 </div>

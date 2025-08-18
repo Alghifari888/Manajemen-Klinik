@@ -45,4 +45,12 @@ class PaymentController extends Controller
         return redirect()->route('kasir.dashboard')
                          ->with('success', 'Pembayaran berhasil disimpan.');
     }
+     public function show(Payment $payment)
+    {
+        // Eager load relasi yang dibutuhkan agar tidak ada query N+1 di view
+        $payment->load(['booking.patient.user', 'booking.doctor.user', 'cashier']);
+
+        // Mengembalikan view khusus untuk kwitansi
+        return view('kasir.payments.show', compact('payment'));
+    }
 }

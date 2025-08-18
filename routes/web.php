@@ -15,11 +15,14 @@ use App\Http\Controllers\Dokter\DashboardController;
 use App\Http\Controllers\Dokter\MedicalRecordController; 
 use App\Http\Controllers\Kasir\PaymentController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Kasir\BookingConfirmationController;
+
 
 // Di sini kita memberikan alias agar tidak terjadi konflik nama
 use App\Http\Controllers\Pasien\DashboardController as PasienDashboardController;
 use App\Http\Controllers\Kasir\DashboardController as KasirDashboardController;
-use App\Http\Controllers\Kasir\BookingConfirmationController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+
 
 
 // Rute Halaman Utama
@@ -44,9 +47,9 @@ Route::middleware('auth')->group(function () {
 
 // Rute untuk Admin
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    // diubah untuk menunjuk ke controller new DashboardController
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    
     Route::resource('polis', PoliController::class);
     Route::resource('doctors', DoctorController::class);
     Route::resource('doctors.schedules', DoctorScheduleController::class)->shallow();
@@ -67,12 +70,12 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->name('dokter.')->g
 
 // Rute untuk Kasir
 Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->name('kasir.')->group(function () {
+    // Pastikan baris ini memiliki ->name('dashboard')
     Route::get('/dashboard', [KasirDashboardController::class, 'index'])->name('dashboard');
     Route::patch('/bookings/{booking}/confirm', BookingConfirmationController::class)->name('booking.confirm');
-
-    // RUTE BARU UNTUK PEMBAYARAN
     Route::get('/bookings/{booking}/payment/create', [PaymentController::class, 'create'])->name('payment.create');
     Route::post('/bookings/{booking}/payment', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/payments/{payment}/print', [PaymentController::class, 'show'])->name('payment.show');
 });
 
 // Rute untuk Pasien
