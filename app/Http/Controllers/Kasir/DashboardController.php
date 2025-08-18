@@ -10,13 +10,23 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Ambil semua booking untuk hari ini (today())
+        // Ambil semua data booking untuk hari ini
         $bookings = Booking::whereDate('booking_date', today())
-                            // TAMBAHKAN 'payment' DI SINI untuk mengecek status pembayaran
                             ->with(['patient.user', 'doctor.user', 'payment']) 
                             ->orderBy('queue_number', 'asc')
                             ->get();
 
-        return view('kasir.dashboard', compact('bookings'));
+        // PENTING: Hitung jumlah pasien yang menunggu konfirmasi ('pending')
+        $pendingConfirmation = $bookings->where('status', 'pending')->count();
+        
+        // PENTING: Hitung jumlah pasien yang menunggu pembayaran ('completed' dan belum ada data payment)
+        $waitingForPayment = $bookings->where('status', 'completed')->where('payment', null)->count();
+
+        // Kirim semua data (termasuk data statistik) ke view
+        return view('kasir.dashboard', compact(
+            'bookings', 
+            'pendingConfirmation', 
+            'waitingForPayment'
+        ));
     }
 }
