@@ -35,6 +35,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Poli</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No. Antrian</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -63,10 +64,19 @@
                                                 </span>
                                             @endif
                                         </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            @if ($booking->status == 'completed' && $booking->medicalRecord)
+                                                <a href="{{ route('pasien.riwayat.show', $booking->id) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                    Lihat Detail
+                                                </a>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
+                                        <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
                                             Anda belum memiliki riwayat booking.
                                         </td>
                                     </tr>

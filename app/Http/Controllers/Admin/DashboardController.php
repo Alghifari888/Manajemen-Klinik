@@ -39,6 +39,19 @@ class DashboardController extends Controller
             'todaysPatients',
             'pendingBookings',
             'recentBookings'
+            
         ));
+        
+    }
+    // Dashboard Dokter
+    public function doctorDashboard()
+    {
+        $bookings = Booking::whereDate('booking_date', today())
+                          ->with(['patient.user'])
+                          ->get();
+
+        $waitingPatients = $bookings->where('status', 'confirmed')->count();
+
+        return view('dokter.dashboard', compact('bookings', 'waitingPatients'));
     }
 }

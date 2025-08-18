@@ -32,14 +32,38 @@
                 </form>
                 
                 <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
-                    <p class="font-bold">Total Pendapatan ({{ \Carbon\Carbon::create()->month($month)->isoFormat('MMMM') }} {{ $year }})</p>
+                    <p class="font-bold">Total Pendapatan ({{ \Carbon\Carbon::create()->month((int)$month)->isoFormat('MMMM') }} {{ $year }})</p>
                     <p class="text-2xl">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</p>
                 </div>
 
                 <h3 class="text-lg font-medium mb-4">Detail Transaksi</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        </table>
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pasien</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dokter</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total Bayar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse ($payments as $payment)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ \Carbon\Carbon::parse($payment->paid_at)->isoFormat('D MMM YYYY, HH:mm') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $payment->booking->patient->user->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $payment->booking->doctor->user->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">Rp {{ number_format($payment->total_amount, 0, ',', '.') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
+                                        Tidak ada data transaksi pada periode ini.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

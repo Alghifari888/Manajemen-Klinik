@@ -86,6 +86,8 @@ Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->name('pasien.')->g
     Route::get('/booking/pilih-dokter/{poli}', [BookingController::class, 'stepTwo'])->name('booking.step-two');
     Route::get('/booking/pilih-jadwal/{doctor}', [BookingController::class, 'stepThree'])->name('booking.step-three');
     Route::post('/booking/simpan', [BookingController::class, 'store'])->name('booking.store');
+    // PENTING: RUTE BARU UNTUK MELIHAT RIWAYAT
+    Route::get('/riwayat/{booking}', [PasienDashboardController::class, 'showMedicalRecord'])->name('riwayat.show');
 });
 
 
