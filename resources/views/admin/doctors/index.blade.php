@@ -26,6 +26,7 @@
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Dokter</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Poli</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Spesialisasi</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No. HP</th>
                                     <th class="relative px-6 py-3"><span class="sr-only">Aksi</span></th>
                                 </tr>
@@ -38,9 +39,15 @@
                                             <div class="text-sm text-gray-500">{{ $doctor->user->email }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $doctor->poli->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $doctor->specialization ?? '-' }}
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $doctor->phone_number }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <a href="{{ route('admin.doctors.schedules.index', $doctor->id) }}" class="text-green-600 hover:text-green-900 mr-4">Jadwal</a>
+
                                             <a href="{{ route('admin.doctors.edit', $doctor->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+
                                             <form action="{{ route('admin.doctors.destroy', $doctor->id) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
@@ -50,7 +57,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
+                                        <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
                                             Data dokter tidak ditemukan.
                                         </td>
                                     </tr>
