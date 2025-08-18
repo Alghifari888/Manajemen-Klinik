@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\DoctorScheduleController;
 use App\Http\Controllers\Pasien\BookingController;
+use App\Http\Controllers\Pasien\DashboardController;
 
 
 // Rute Halaman Utama
@@ -60,10 +61,11 @@ Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->name('kasir.')->grou
 
 // Ganti blok rute Pasien yang lama dengan yang ini
 // Rute untuk Pasien
+// Rute untuk Pasien
 Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->name('pasien.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pasien.dashboard');
-    })->name('dashboard');
+    // Arahkan ke DashboardController yang baru
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
 
     // Rute untuk Alur Booking
     Route::get('/booking/pilih-poli', [BookingController::class, 'stepOne'])->name('booking.step-one');
