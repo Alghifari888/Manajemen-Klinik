@@ -239,15 +239,8 @@ Proyek ini dilisensikan di bawah Lisensi MIT.
 
 Hak Cipta (c) 2025 Alghifari888
 
-Dengan ini diberikan izin, secara gratis, kepada siapa pun yang memperoleh salinan
-perangkat lunak dan file dokumentasi terkait (selanjutnya disebut "Perangkat Lunak"), untuk menggunakan
-Perangkat Lunak tanpa batasan, termasuk namun tidak terbatas pada hak untuk menggunakan, menyalin,
-memodifikasi, menggabungkan, menerbitkan, mendistribusikan, mensublisensikan, dan/atau menjual
-salinan Perangkat Lunak, dengan ketentuan sebagai berikut:
+Proyek ini menggunakan Lisensi MIT, yang berarti Anda bebas menggunakan, menyalin, mengubah, dan mendistribusikan perangkat lunak ini, termasuk untuk keperluan komersial, selama menyertakan pemberitahuan hak cipta dan lisensi asli.
 
-Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam semua
-salinan atau bagian substansial dari Perangkat Lunak.
+Perangkat lunak ini disediakan apa adanya tanpa jaminan apa pun. Pengembang tidak bertanggung jawab atas kerusakan atau masalah yang timbul dari penggunaan perangkat lunak ini.
 
-PERANGKAT LUNAK INI DIBERIKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT
-MAUPUN TERSIRAT, TERMASUK NAMUN TIDAK TERBATAS PADA JAMINAN DAYA JUAL,
-KECOCOKAN UNTUK TUJUAN TERTENTU, DAN TIDAK PELANGGARAN HAK PIHAK LAIN.
+
