@@ -233,7 +233,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ---
 
-## 📄 Lisensi (Bahasa Indonesia)
+## 📄 Lisensi (Indonesia)
 
 Proyek ini dilisensikan di bawah Lisensi MIT.
 
