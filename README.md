@@ -213,3 +213,41 @@ Kami sangat terbuka untuk kontribusi dari komunitas.
 * **Fokus**: Usahakan setiap Pull Request hanya fokus pada satu fitur atau perbaikan.
 
 Terima kasih telah berkontribusi!
+
+## 📄 License (English)
+
+This project is licensed under the MIT License.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+---
+
+## 📄 Lisensi (Bahasa Indonesia)
+
+Proyek ini dilisensikan di bawah Lisensi MIT.
+
+Hak Cipta (c) 2025 Alghifari888
+
+Dengan ini diberikan izin, secara gratis, kepada siapa pun yang memperoleh salinan
+perangkat lunak dan file dokumentasi terkait (selanjutnya disebut "Perangkat Lunak"), untuk menggunakan
+Perangkat Lunak tanpa batasan, termasuk namun tidak terbatas pada hak untuk menggunakan, menyalin,
+memodifikasi, menggabungkan, menerbitkan, mendistribusikan, mensublisensikan, dan/atau menjual
+salinan Perangkat Lunak, dengan ketentuan sebagai berikut:
+
+Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam semua
+salinan atau bagian substansial dari Perangkat Lunak.
+
+PERANGKAT LUNAK INI DIBERIKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT
+MAUPUN TERSIRAT, TERMASUK NAMUN TIDAK TERBATAS PADA JAMINAN DAYA JUAL,
+KECOCOKAN UNTUK TUJUAN TERTENTU, DAN TIDAK PELANGGARAN HAK PIHAK LAIN.
